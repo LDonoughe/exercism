@@ -9,27 +9,20 @@ defmodule RomanNumerals do
     IO.inspect(Integer.digits(number))
     number
     |> Integer.digits
-    # |> List.last
     |> parse_digits
   end
 
 
-
-  defp value_to_symbol do
-    
-  end
-
-
-
-
-
-
-
   defp parse_digits(digits) do
-    digits
+    digits = digits
     |> left_pad
 
-    "#{parse_ones(List.last(digits))}"
+    [thous | digits] = digits
+    [hund | digits] = digits
+    [tens | digits] = digits
+    [ones | _digits] = digits
+
+    "#{parse_tens(tens)}#{parse_ones(ones)}"
   end
 
   defp left_pad(digits) do
@@ -41,7 +34,15 @@ defmodule RomanNumerals do
 
   end
 
+  defp parse_tens(digit) do
+    parse_digit(digit, "X", "L", "C")
+  end
+
   defp parse_ones(digit) do
+    parse_digit(digit, "I", "V", "X")
+  end
+
+  defp parse_digit(digit, one, five, ten) do
     IO.inspect("digit")
     IO.inspect(digit)
     cond do
@@ -49,20 +50,20 @@ defmodule RomanNumerals do
         Enum.reduce(0..digit, "", fn (n, acc) ->
           cond do
             n > 0 ->
-              "I#{acc}"
+              "#{one}#{acc}"
             true ->
               acc
           end
         end)
       digit == 4 ->
-        "IV"
+        "#{one}#{five}"
       digit == 9 ->
-        "IX"
+        "#{one}#{ten}"
       true ->
         "V#{Enum.reduce(0..(digit - 5), "", fn (n, acc) ->
           cond do
             n > 0 ->
-              "I#{acc}"
+              "#{one}#{acc}"
             true ->
               acc
           end
