@@ -25,27 +25,43 @@ defmodule ListOpsTest do
     assert L.reverse([]) == []
   end
 
+  test "head" do
+    assert L.head([5, 10, 15]) == 5
+  end
+
+  test "tail" do
+    assert L.tail([5, 10, 15]) == [10, 15]
+  end
+
+  test "prepend empty" do
+    assert L.prepend([], 0) == [0]
+  end
+
+  test "prepend non-empty" do
+    assert L.prepend([1, 2, 3], 0) == [0, 1, 2, 3]
+  end
+
   # @tag :pending
   test "reverse of normal list" do
     assert L.reverse([1, 3, 5, 7]) == [7, 5, 3, 1]
   end
 
-  @tag :pending
+  # @tag :pending
   test "reverse of huge list" do
     assert L.reverse(Enum.to_list(1..1_000_000)) == Enum.to_list(1_000_000..1)
   end
 
-  @tag :pending
+  # @tag :pending
   test "map of empty list" do
     assert L.map([], &(&1 + 1)) == []
   end
 
-  @tag :pending
+  # @tag :pending
   test "map of normal list" do
     assert L.map([1, 3, 5, 7], &(&1 + 1)) == [2, 4, 6, 8]
   end
 
-  @tag :pending
+  # @tag :pending
   test "map of huge list" do
     assert L.map(Enum.to_list(1..1_000_000), &(&1 + 1)) == Enum.to_list(2..1_000_001)
   end
