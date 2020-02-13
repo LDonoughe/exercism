@@ -37,13 +37,8 @@ defmodule ListOps do
   defp do_reverse([], k), do: k
 
   defp do_reverse([hd | t], k) do
-    # [h | t] = l
-    # IO.inspect
     do_reverse(t, prepend(k, hd))
   end
-
-  # defp do_reverse([h1 | t], k), do: do_reverse(t, h1)
-  # defp do_reverse([h1], k), do:
 
   @spec map(list, (any -> any)) :: list
   def map(l, f) do
@@ -58,6 +53,23 @@ defmodule ListOps do
 
   @spec filter(list, (any -> as_boolean(term))) :: list
   def filter(l, f) do
+    do_filter(l, f, [])
+  end
+
+  @spec append(list, any) :: list
+  def append(list, item) do
+    reverse(prepend(reverse(list), item))
+  end
+
+  @spec do_filter(list, (any -> as_boolean(term)), list) :: list
+  def do_filter([], f, acc), do: acc
+  def do_filter(l, f, acc) do
+    x = f.(head(l))
+    if x do
+      do_filter(tail(l), f, append(acc, head(l)))
+    else
+      do_filter(tail(l), f, acc)
+    end
   end
 
   @type acc :: any
