@@ -62,11 +62,11 @@ defmodule ListOps do
   end
 
   @spec do_filter(list, (any -> as_boolean(term)), list) :: list
-  def do_filter([], f, acc), do: acc
+  def do_filter([], f, acc), do: reverse(acc)
   def do_filter(l, f, acc) do
     x = f.(head(l))
     if x do
-      do_filter(tail(l), f, append(acc, head(l)))
+      do_filter(tail(l), f, prepend(acc, head(l)))
     else
       do_filter(tail(l), f, acc)
     end
