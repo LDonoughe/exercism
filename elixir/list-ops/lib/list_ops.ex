@@ -56,11 +56,6 @@ defmodule ListOps do
     do_filter(l, f, [])
   end
 
-  @spec append(list, any) :: list
-  def append(list, item) do
-    reverse(prepend(reverse(list), item))
-  end
-
   @spec do_filter(list, (any -> as_boolean(term)), list) :: list
   def do_filter([], f, acc), do: reverse(acc)
   def do_filter(l, f, acc) do
@@ -80,7 +75,20 @@ defmodule ListOps do
   end
 
   @spec append(list, list) :: list
+  def append([], b), do: b
+  def append(a, []), do: a
   def append(a, b) do
+    do_append(reverse(a), b)
+  end
+
+  def do_append([], b), do: b
+  def do_append(a,b) do
+    do_append(tail(a), prepend(b,head(a)))
+  end
+
+  @spec append_item(list, any) :: list
+  def append_item(list, item) do
+    reverse(prepend(reverse(list), item))
   end
 
   @spec concat([[any]]) :: [any]
