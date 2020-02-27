@@ -85,7 +85,6 @@ defmodule ListOpsTest do
   end
 
   # @tag :pending
-  # Not efficient enough
   test "filter of huge list" do
     assert L.filter(Enum.to_list(1..1_000_000), &odd?/1) == Enum.map(1..500_000, &(&1 * 2 - 1))
   end
@@ -95,18 +94,18 @@ defmodule ListOpsTest do
     assert L.reduce([], 0, &(&1 + &2)) == 0
   end
 
-  @tag :pending
+  # @tag :pending
   test "reduce of normal list" do
     assert L.reduce([1, 2, 3, 4], -3, &(&1 + &2)) == 7
   end
 
-  @tag :pending
+  # @tag :pending
   test "reduce of huge list" do
     assert L.reduce(Enum.to_list(1..1_000_000), 0, &(&1 + &2)) ==
              Enum.reduce(1..1_000_000, 0, &(&1 + &2))
   end
 
-  @tag :pending
+  # @tag :pending
   test "reduce with non-commutative function" do
     assert L.reduce([1, 2, 3, 4], 10, fn x, acc -> acc - x end) == 0
   end
