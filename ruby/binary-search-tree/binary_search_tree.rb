@@ -6,3 +6,21 @@ To get started with TDD, see the `README.md` file in your
 `ruby/binary-search-tree` directory.
 =end
 
+class Bst
+  def initialize(data)
+    @data = data
+    @left = nil
+    @right = nil
+  end
+
+  def insert(data)
+    if data <= @data
+      @left = Bst.new(data)
+    else
+      @right = Bst.new(data)
+    end
+  end
+
+  attr_reader :data, :left, :right
+end
+
