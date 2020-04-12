@@ -13,14 +13,27 @@ class Bst
     @right = nil
   end
 
+  attr_reader :data, :left, :right
+
+  # could DRY this out with a helper
   def insert(data)
     if data <= @data
-      @left = Bst.new(data)
+      if @left.nil?
+        @left = Bst.new(data)
+      else
+        @left.insert(data)
+      end
     else
-      @right = Bst.new(data)
+      if @right.nil?
+        @right = Bst.new(data)
+      else
+        @right.insert(data)
+      end
     end
   end
 
-  attr_reader :data, :left, :right
+  def each(&block)
+    block.call(self.data)
+  end
 end
 
