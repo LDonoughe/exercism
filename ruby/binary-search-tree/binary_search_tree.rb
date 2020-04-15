@@ -33,7 +33,10 @@ class Bst
   end
 
   def each(&block)
+    return self.to_enum if block.nil?
+    @left&.each(&block)
     block.call(self.data)
+    @right&.each(&block)
   end
 end
 
