@@ -2,24 +2,15 @@ function SumOfMultiples(multiples: Array<Number>) {
 
   return { to: function(sumTo: Number) {
     var sum = 0;
-    // console.log(sum)
-    // console.log(sumTo)
-    // console.log(Array(sumTo))
     for(var i = 1; i< sumTo; i++) {
-      // console.log(i)
-      // let counted = false;
-      // return multiples
+      let counted = false;
       multiples.forEach(function(multiple) {
-        // debugger;
-        // console.log(multiple)
-        if (Number(i) % Number(multiple) == 0 && true) {
-          sum = Number(sum) + Number(multiple);
-          // console.log(sum)
-          // counted = true
+        if (Number(i) % Number(multiple) == 0 && counted == false) {
+          sum = Number(sum) + Number(i);
+          counted = true
         }
       })
     }
-    // console.log(sum)
     return sum;
   }}
 }

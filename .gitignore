@@ -10,3 +10,5 @@ erl_crash.dump
 .elixir_ls/
 **/.elixir_ls/
 **/.node_modules/
+**/.node_modules
+node_modules
